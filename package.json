@@ -1,0 +1,19 @@
+{
+  "name": "appengine-hapi",
+  "description": "An example of running Hapi.js on Google App Engine.",
+  "version": "0.0.1",
+  "private": true,
+  "license": "Apache Version 2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": "~4.2"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "deploy": "gcloud app deploy  --project homecontrol-142723"
+  },
+  "dependencies": {
+    "hapi": "^13.0.0",
+    "inert": "^4.0.2"
+  }
+}

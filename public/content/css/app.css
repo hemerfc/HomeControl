@@ -1,0 +1,726 @@
+html {
+    position: relative;
+    min-height: 100%;
+    background: #eee;
+}
+
+body {
+    min-height: 100%;
+    background: #eee;
+}
+
+/* FORM SIGNIN */
+.login-container {
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+
+    .login-container .row {
+        margin-top: 100px;
+        /*position: $position;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);*/
+    }
+
+.backdrop {
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    opacity: 0.7;
+    background-color: black;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+    .form-signin .form-signin-heading,
+    .form-signin .checkbox {
+        margin-bottom: 10px;
+    }
+
+    .form-signin .checkbox {
+        font-weight: normal;
+    }
+
+    .form-signin .form-control {
+        position: relative;
+        height: auto;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+        .form-signin .form-control:focus {
+            z-index: 2;
+        }
+
+    .form-signin input[type="text"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+.modal {
+    display: flex !important;
+    height: 100%;
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+
+    .modal .modal-dialog {
+        margin: auto;
+    }
+
+.modal-backdrop {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+
+.notVisible {
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* NAVBAR */
+.navbar {
+    z-index: 200;
+    width: 100%;
+    border-radius: 0;
+    border: 0;
+    margin-bottom: 0;
+    -webkit-transition: all 0.8s ease;
+    -moz-transition: all 0.8s ease;
+    -o-transition: all 0.8s ease;
+    transition: all 0.8s ease;
+}
+
+    .navbar .navbar-brand {
+        padding: 0 5px;
+    }
+
+#navbar .navbar-right {
+    padding-right: 10px;
+}
+
+#navbar .dropdown-menu > li > a {
+    padding: 3px 10px 3px 10px;
+}
+
+    #navbar .dropdown-menu > li > a > span {
+        float: right;
+        padding: 0px 3px;
+    }
+
+        #navbar .dropdown-menu > li > a > span:hover {
+            font-weight: bold;
+        }
+
+/* SIDE-BAR */
+.dialog {
+    position: fixed;
+    top: 0;
+    right: -35%;
+    width: 35%;
+    height: 100%;
+    background: #eee;
+    -webkit-transition: all 0.8s ease;
+    -moz-transition: all 0.8s ease;
+    -o-transition: all 0.8s ease;
+    transition: all 0.8s ease;
+    /*
+    -webkit-box-shadow: inset 3px 0px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 3px 0px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: inset 3px 0px 10px 0px rgba(0,0,0,0.75);
+    */
+}
+
+    .dialog .modal-backdrop {
+        position: absolute;
+        opacity: .5;
+    }
+
+@media (min-width: 768px) {
+    .dialog {
+        width: 35%;
+    }
+
+    /* showing-dialog - é aplicado ao body */
+    .showing-dialog .navbar, .showing-dialog footer, .showing-dialog .plantview {
+        width: 65%;
+    }
+
+    /* show-dialog - é aplicado ao elemento do dialog */
+    .show-dialog .dialog {
+        right: 0;
+    }
+
+    /* show-dialog - é aplicado ao elemento do dialog */
+    .hide-dialog .dialog {
+        right: 35% !important;
+    }
+}
+
+.dialog .dialog-header {
+    border-bottom: 1px solid #cacaca;
+    padding: 0 10px;
+    overflow: hidden;
+    height: 50px;
+}
+
+    .dialog .dialog-header .title {
+        float: left;
+        height: 50px;
+        padding: 15px 15px;
+        font-size: 18px;
+        line-height: 20px;
+        margin: 0px;
+    }
+
+    .dialog .dialog-header button {
+        float: right;
+        margin: 10px 0;
+    }
+
+.dialog .dialog-body {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    bottom: 55px;
+    right: 0;
+    padding: 10px;
+    overflow: auto;
+}
+
+.dialog .dialog-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    border-top: 1px solid #cacaca;
+    text-align: right;
+}
+
+    .dialog .dialog-footer .btn {
+    }
+
+.list-group-btns {
+    float: right;
+    font-size: 1.2em;
+}
+
+    .list-group-btns a, .list-group-btns a:active, .list-group-btns a:hover, .list-group-btns a:link {
+        padding: 3px 5px 3px 5px;
+        color: black;
+    }
+
+        .list-group-btns a > span:hover {
+            font-weight: bold;
+        }
+
+
+
+/* FOOTER */
+footer {
+    position: fixed;
+    z-index: 100;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 150px;
+    border-top: solid 2px black;
+    background-color: #eee;
+    -webkit-transition: all 0.8s ease;
+    -moz-transition: all 0.8s ease;
+    -o-transition: all 0.8s ease;
+    transition: all 0.8s ease;
+}
+
+    footer .nav-tabs {
+        position: absolute;
+        top: -2em;
+        right: 15px;
+        line-height: 1em;
+    }
+
+        footer .nav-tabs a,
+        footer .nav-tabs a:active,
+        footer .nav-tabs a:focus,
+        footer .nav-tabs a:hover {
+            border: 0;
+            padding: 0.2em 10px 0.2em 10px;
+            background: black;
+            font-weight: bold;
+            color: #999999;
+        }
+
+        footer .nav-tabs li.active a,
+        footer .nav-tabs li.active a:active,
+        footer .nav-tabs li.active a:focus,
+        footer .nav-tabs li.active a:hover {
+            border: 0;
+            padding: 0.2em 10px 0.2em 10px;
+            background: black;
+            font-weight: bold;
+            color: #999999;
+            text-decoration: underline;
+        }
+
+    footer #footer-toggle {
+        /*padding: 0.35em 10px 0.5em 10px;*/
+    }
+
+.hide-footer footer {
+    bottom: -150px;
+}
+
+/* COMMANDS */
+commands .table {
+    display: inline-block;
+    height: 150px;
+    width: 100%;
+    margin: 0;
+    /*background-color: #000;*/
+    font-weight: bold;
+    /*color: #00b200;*/
+    font-family: "Lucida Console", Monaco, monospace;
+}
+
+    commands .table tr {
+        width: 100%;
+        display: inline-block;
+    }
+
+    commands .table > tbody > tr > td,
+    commands .table > tbody > tr > th,
+    commands .table > tfoot > tr > td,
+    commands .table > tfoot > tr > th,
+    commands .table > thead > tr > td,
+    commands .table > thead > tr > th {
+        padding: 0px 5px;
+        display: inline-block;
+        width: 100%;
+    }
+
+    commands .table tbody {
+        display: block;
+        overflow-y: scroll;
+        width: 100%;
+        height: 125px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    commands .table tfoot {
+        display: block;
+        bottom: 0px;
+        background-color: #eee;
+    }
+
+    commands .table td.resp {
+        font-weight: normal;
+    }
+
+commands .left {
+    float: left;
+    margin: 0;
+}
+
+commands .full {
+    overflow: hidden;
+    display: block;
+    padding-left: 4px;
+}
+
+    commands .full input {
+        width: 100%;
+        background: transparent;
+        border: 0;
+        padding: 0;
+        margin: 0;
+    }
+
+        commands .full input:focus {
+            outline: 0;
+        }
+
+/* ALARMS */
+
+alarms > table > tbody {
+    display: block;
+    overflow-y: scroll;
+    width: 100%;
+    height: 150px;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.0;
+    }
+}
+
+@-webkit-keyframes blink {
+    50% {
+        opacity: 0.0;
+    }
+}
+
+alarms > table > tbody > tr {
+    display: block;
+    animation: blink 1s step-start 0s 10;
+    -webkit-animation: blink 1s step-start 0s 10;
+}
+
+/* PLANTVIEW */
+
+.plantview {
+    position: fixed;
+    z-index: 100;
+    padding-right: 0px;
+    padding-bottom: 200px;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: all 0.8s ease;
+    -moz-transition: all 0.8s ease;
+    -o-transition: all 0.8s ease;
+    transition: all 0.8s ease;
+}
+
+    .plantview .content {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        overflow: auto;
+        background-color: black;
+    }
+
+        .plantview .content img {
+            -webkit-user-drag: none;
+        }
+
+.hide-footer .plantview {
+    padding-bottom: 50px;
+}
+
+devicemonitor {
+    position: absolute;
+    z-index: 10;
+    zoom: 1;
+}
+
+    devicemonitor .devicename {
+        padding: 0.25em;
+        border: 1px solid black;
+        border-radius: 0.25em;
+        margin: 2.1em 0;
+        width: 5em;
+        /* transparencia de backgroud sem png funciona no ie8 */
+        background: rgb(0,0,0);
+        background: rgba(0,0,0,0.8);
+        /* For IE – resetting background color hack */
+        background: transparent\9;
+        /* For IE 5.5 – 7*/
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000,endColorstr=#CC000000);
+        /* For IE 8*/
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CC000000, endColorstr=#CC000000)";
+    }
+
+    devicemonitor.custom {
+    }
+
+        devicemonitor.custom img {
+            position: absolute;
+        }
+
+    devicemonitor.showProperties {
+        z-index: 20;
+        min-width: 250px;
+    }
+
+    devicemonitor:nth-child(n) {
+        filter: none;
+    }
+
+    devicemonitor .customized img {
+        position: absolute;
+    }
+
+/* o texto fica vermelho e picando se tiver com um alame */
+@-webkit-keyframes blinker {
+    from {
+        text-shadow: 1px 1px 2px #000000;
+    }
+
+    to {
+        text-shadow: 1px 1px 4px #ff0000;
+    }
+}
+
+devicemonitor.hasalarm div.devicename {
+    color: #FF0100;
+    text-decoration: blink;
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 0.4s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-direction: alternate;
+}
+
+devicemonitor div.devicename {
+    text-align: center;
+    color: #01FF00;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px #000000;
+    cursor: pointer;
+    padding: 10px 0;
+}
+
+devicemonitor.edit div.devicename {
+    cursor: auto;
+}
+
+devicemonitor.edit {
+    border: 1px dashed black;
+}
+
+    devicemonitor.edit:hover div.tools,
+    devicemonitor div.holding {
+        display: block !important;
+    }
+
+devicemonitor div.tools {
+    position: absolute;
+    right: 0.05em;
+    top: -2.20em;
+    width: 4.8em;
+    height: 2.15em;
+    border-radius: 0.25em 0.25em 0 0;
+    background-color: silver;
+    padding: 0.25em;
+    margin-bottom: 0;
+    display: none;
+    color: black;
+}
+
+devicemonitor .tools span {
+    margin-left: 5px;
+    float: left;
+    line-height: inherit;
+}
+
+devicemonitor .handler {
+    cursor: move;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+}
+
+devicemonitor .holding .handler {
+    cursor: move;
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+}
+
+devicemonitor .properties {
+    display: none;
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    color: white;
+}
+
+devicemonitor.showProperties .properties {
+    display: block;
+}
+
+devicemonitor .properties ul {
+    list-style: none;
+    padding: 0;
+}
+
+    devicemonitor .properties ul li {
+        overflow: auto;
+    }
+
+    devicemonitor .properties ul label {
+        width: 105px;
+        max-width: 105px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        float: left;
+    }
+
+devicemonitor .properties div {
+    display: inline-block;
+    width: 150px;
+    float: right;
+}
+
+    devicemonitor .properties div span {
+        text-align: right;
+        width: 150px;
+        display: inline-block;
+    }
+
+devicemonitor .properties input {
+    color: black;
+    text-align: left;
+}
+
+devicemonitor .properties div.range span {
+    font-size: 0.7em;
+}
+
+/* Gmail style scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-width: 1px 1px 1px 2px;
+}
+
+::-webkit-scrollbar-track {
+    border-width: 0;
+    background-color: rgba(0,0,0,.3);
+}
+
+::-webkit-scrollbar {
+    height: 16px;
+    overflow: visible;
+    width: 16px;
+}
+
+::-webkit-scrollbar-button {
+    height: 0;
+    width: 0;
+}
+
+::-webkit-scrollbar-track:hover {
+    background-color: rgba(0,0,0,.3);
+    box-shadow: inset 1px 1px 0 rgba(100,100,100,.28),inset -1px -1px 0 rgba(0,0,0,.14);
+}
+
+::-webkit-scrollbar-track {
+    background-clip: padding-box;
+    border: solid transparent;
+    /* border-width: 0 0 0 4px; */
+    border-width: 0 1px 0 6px;
+}
+
+    ::-webkit-scrollbar-track:horizontal {
+        /* border-width: 4px 0 0; */
+        border-width: 6px 0 1px;
+    }
+
+    ::-webkit-scrollbar-track:hover {
+        background-color: rgba(0,0,0,.3);
+        box-shadow: inset 1px 0 0 rgba(220,220,220,.2);
+    }
+
+    ::-webkit-scrollbar-track:horizontal:hover {
+        box-shadow: inset 0 1px 0 rgba(0,0,0,.2);
+    }
+
+    ::-webkit-scrollbar-track:active {
+        background-color: rgba(0,0,0,.3);
+        box-shadow: inset 1px 0 0 rgba(0,0,0,0,.28),inset -1px 0 0 rgba(0,0,0,.14);
+    }
+
+    ::-webkit-scrollbar-track:horizontal:active {
+        box-shadow: inset 0 1px 0 rgba(0,0,0,.28),inset 0 -1px 0 rgba(0,0,0,.14);
+    }
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(220,220,220,.4);
+    background-clip: padding-box;
+    border: solid transparent;
+    border-width: 1px 1px 1px 6px;
+    min-height: 28px;
+    padding: 100px 0 0;
+    box-shadow: inset 1px 1px 0 rgba(220,220,220,.2),inset 0 -1px 0 rgba(220,220,220,.14);
+}
+
+    ::-webkit-scrollbar-thumb:horizontal {
+        border-width: 6px 1px 1px;
+        padding: 0 0 0 100px;
+        box-shadow: inset 1px 1px 0 rgba(220,220,220,.2),inset -1px 0 0 rgba(220,220,220,.14);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(220,220,220,.8);
+        box-shadow: inset 1px 1px 1px rgba(220,220,220,.5);
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+        background-color: rgba(220,220,220,1);
+        box-shadow: inset 1px 1px 3px rgba(220,220,220,0.7);
+    }
+
+::-webkit-scrollbar-thumb {
+    border-width: 0 1px 0 6px;
+}
+
+    ::-webkit-scrollbar-thumb:horizontal {
+        border-width: 6px 0 1px;
+    }
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+body::-webkit-scrollbar-track-piece {
+    background-clip: padding-box;
+    background-color: #f5f5f5;
+    border: solid #fff;
+    border-width: 0 0 0 3px;
+    box-shadow: inset 1px 0 0 rgba(220,220,220,.28),inset -1px 0 0 rgba(220,220,220,.14);
+}
+
+    body::-webkit-scrollbar-track-piece:horizontal {
+        border-width: 3px 0 0;
+        box-shadow: inset 0 1px 0 rgba(220,220,220,.28),inset 0 -1px 0 rgba(220,220,220,.14);
+    }
+
+body::-webkit-scrollbar-thumb {
+    border-width: 1px 1px 1px 5px;
+}
+
+    body::-webkit-scrollbar-thumb:horizontal {
+        border-width: 5px 1px 1px;
+    }
+
+body::-webkit-scrollbar-corner {
+    background-clip: padding-box;
+    background-color: #f5f5f5;
+    border: solid #fff;
+    border-width: 3px 0 0 3px;
+    box-shadow: inset 1px 1px 0 rgba(220,220,220,.28);
+}
