@@ -12,6 +12,20 @@
     "start": "node index.js",
     "postinstall": "cd websrc && npm install && webpack"
   },
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "chai": "^3.5.0",
+    "chai-immutable": "^1.6.0",
+    "jsdom": "^9.5.0",
+    "mocha": "^3.0.2",
+    "react-hot-loader": "^3.0.0-beta.3",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.15.1"
+  },
   "dependencies": {
     "hapi": "^13.0.0",
     "inert": "^4.0.2"
