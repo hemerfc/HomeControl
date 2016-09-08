@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "deploy": "gcloud app deploy  --project homecontrol-142723"
+    "postinstall": "cd websrc && npm install && webpack"
   },
   "dependencies": {
     "hapi": "^13.0.0",

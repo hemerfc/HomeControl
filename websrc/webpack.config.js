@@ -13,8 +13,7 @@ module.exports = {
     extensions: ['', '.js', '.jsx']
   },
   output: {
-    path: __dirname + '../public',
-    publicPath: '/',
+    path: __dirname + '/../public',
     filename: 'bundle.js'
   },
   devServer: {

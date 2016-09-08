@@ -34,7 +34,7 @@
 /******/ 	__webpack_require__.c = installedModules;
 
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/";
+/******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
@@ -90,8 +90,8 @@
 	    _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(_MainView2.default, null),
-	      _react2.default.createElement(_NavBar2.default, null)
+	      _react2.default.createElement(_NavBar2.default, null),
+	      _react2.default.createElement(_MainView2.default, null)
 	    )
 	  ), document.getElementById('root'));
 	}
@@ -23098,24 +23098,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 	var NavBar = exports.NavBar = function NavBar(_ref) {
 	  var isEditing = _ref.isEditing;
-	  var areas = _ref.areas;
-	  var selectedArea = _ref.selectedArea;
-	  var selectArea = _ref.selectArea;
-	  var deleteArea = _ref.deleteArea;
-	  var editArea = _ref.editArea;
-	  var createArea = _ref.createArea;
-	  var showDevices = _ref.showDevices;
-	  var startEdit = _ref.startEdit;
-	  var completeEdit = _ref.completeEdit;
-	  var createMonitor = _ref.createMonitor;
+	  var rooms = _ref.rooms;
+	  var selectedRoom = _ref.selectedRoom;
+	  var selectRoom = _ref.selectRoom;
 	  var exit = _ref.exit;
 	  return _react2.default.createElement(
 	    'nav',
-	    { className: 'navbar navbar-inverse' },
+	    { className: 'navbar-default navbar-static-top navbar-inverse' },
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'navbar-header' },
@@ -23133,8 +23124,13 @@
 	      ),
 	      _react2.default.createElement(
 	        'a',
+	        { className: 'main-icon' },
+	        _react2.default.createElement('span', { className: 'glyphicon glyphicon-home', 'aria-hidden': 'true' })
+	      ),
+	      _react2.default.createElement(
+	        'a',
 	        { className: 'navbar-brand', href: '#' },
-	        _react2.default.createElement('img', { src: '/content/img/logo_134x50.png', alt: 'Águia Sistemas' })
+	        'Home'
 	      )
 	    ),
 	    _react2.default.createElement(
@@ -23150,62 +23146,27 @@
 	            'a',
 	            { href: '#', className: 'dropdown-toggle', 'data-toggle': 'dropdown',
 	              role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
-	            'Area: ',
-	            selectedArea.name,
+	            'Comodo: ',
+	            selectedRoom.get('name'),
 	            _react2.default.createElement('span', { className: 'caret' })
 	          ),
 	          _react2.default.createElement(
 	            'ul',
 	            { className: 'dropdown-menu' },
-	            areas.map(function (area) {
-	              var _React$createElement, _React$createElement2;
-
+	            rooms.map(function (room) {
 	              return _react2.default.createElement(
 	                'li',
-	                { key: area.id },
+	                { key: room.get('id') },
 	                _react2.default.createElement(
 	                  'a',
 	                  { href: '#', onClick: function onClick() {
-	                      return selectArea(area);
+	                      return selectRoom(room);
 	                    } },
-	                  area.name,
-	                  _react2.default.createElement('span', (_React$createElement = { onClick: function onClick() {
-	                      return deleteArea(area);
-	                    }, className: isEditing ? "" : "hide"
-	                  }, _defineProperty(_React$createElement, 'className', 'glyphicon glyphicon-trash'), _defineProperty(_React$createElement, 'aria-hidden', 'true'), _React$createElement)),
-	                  _react2.default.createElement('span', (_React$createElement2 = { onClick: function onClick() {
-	                      return editArea(area);
-	                    }, className: isEditing ? "" : "hide"
-	                  }, _defineProperty(_React$createElement2, 'className', 'glyphicon glyphicon-pencil'), _defineProperty(_React$createElement2, 'aria-hidden', 'true'), _React$createElement2))
-	                ),
-	                area.name
+	                  room.get('name')
+	                )
 	              );
 	            }),
-	            !isEditing ? null : _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#', onClick: function onClick() {
-	                    return createArea();
-	                  } },
-	                'Nova Area',
-	                _react2.default.createElement('span', {
-	                  className: 'glyphicon glyphicon-plus' })
-	              )
-	            ),
 	            _react2.default.createElement('li', { role: 'separator', className: 'divider' }),
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#', onClick: function onClick() {
-	                    return showDevices();
-	                  } },
-	                'Dispositivos'
-	              )
-	            ),
 	            _react2.default.createElement(
 	              'li',
 	              null,
@@ -23216,81 +23177,11 @@
 	              )
 	            )
 	          )
-	        ),
-	        _react2.default.createElement(
-	          'li',
-	          { className: 'dropdown' },
-	          _react2.default.createElement(
-	            'a',
-	            { href: '#', className: 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button',
-	              'aria-haspopup': 'true', 'aria-expanded': 'false' },
-	            'Relatórios',
-	            _react2.default.createElement('span', { className: 'caret' })
-	          ),
-	          _react2.default.createElement(
-	            'ul',
-	            { className: 'dropdown-menu' },
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { onClick: function onClick() {
-	                    return showTensaoChart();
-	                  }, href: '#' },
-	                'Tensão'
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { onClick: function onClick() {
-	                    return showPropertyHistory();
-	                  }, href: '#' },
-	                'Property History'
-	              )
-	            )
-	          )
 	        )
 	      ),
 	      _react2.default.createElement(
 	        'ul',
 	        { className: 'nav navbar-nav navbar-right' },
-	        _react2.default.createElement(
-	          'li',
-	          { className: isEditing ? "" : "hide" },
-	          _react2.default.createElement(
-	            'a',
-	            { href: '#', onClick: function onClick() {
-	                return startEdit();
-	              } },
-	            'Editar'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'li',
-	          { className: isEditing ? "" : "hide" },
-	          _react2.default.createElement(
-	            'a',
-	            { href: '#', onClick: function onClick() {
-	                return completeEdit();
-	              } },
-	            'Concluir'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'li',
-	          { className: isEditing ? "" : "hide" },
-	          _react2.default.createElement(
-	            'a',
-	            { href: '#', onClick: function onClick() {
-	                return createMonitor();
-	              } },
-	            'Criar Monitor'
-	          )
-	        ),
 	        _react2.default.createElement(
 	          'li',
 	          null,
@@ -23309,37 +23200,17 @@
 
 	// return container component connected woth the store
 	exports.default = (0, _reactRedux.connect)(function (state) {
-	  return { isEditing: state.isEditing,
-	    areas: state.areas,
-	    selectedArea: state.selectedArea };
+	  return {
+	    rooms: state.rooms,
+	    selectedRoom: state.selectedRoom
+	  };
 	}, function (dispatch) {
 	  return {
-	    selectArea: function selectArea(area) {
-	      dispatch(actions.areaSelect(area));
-	    },
-	    deleteArea: function deleteArea(area) {
-	      dispatch(actions.areaDelete(area));
-	    },
-	    editArea: function editArea(area) {
-	      //dispatch(areaEdit(area))
-	    },
-	    createArea: function createArea() {
-	      //dispatch(areaCreate())
-	    },
-	    showDevices: function showDevices() {
-	      //dispatch(devicesShow())
-	    },
-	    startEdit: function startEdit() {
-	      //dispatch(startEdit())
-	    },
-	    completeEdit: function completeEdit() {
-	      //dispatch(completeEdit())
-	    },
-	    createMonitor: function createMonitor() {
-	      //dispatch(monitorCreate())
+	    selectRoom: function selectRoom(room) {
+	      dispatch(actions.roomSelect(room));
 	    },
 	    exit: function exit() {
-	      //dispatch(edit())
+	      //dispatch(exit())
 	    }
 	  };
 	})(NavBar);
@@ -23353,16 +23224,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var areaAdd = exports.areaAdd = function areaAdd(area) {
-	  return { type: 'AREA_ADD', data: area };
-	};
-
-	var areaDelete = exports.areaDelete = function areaDelete(area) {
-	  return { type: 'AREA_DELETE', data: area };
-	};
-
-	var areaSelect = exports.areaSelect = function areaSelect(id) {
-	  return { type: 'AREA_SELECT', data: id };
+	var roomSelect = exports.roomSelect = function roomSelect(id) {
+	  return { type: 'ROOM_SELECT', data: id };
 	};
 
 	var monitorSelect = exports.monitorSelect = function monitorSelect(id) {
@@ -23401,27 +23264,27 @@
 	  var onMonitorClick = _ref.onMonitorClick;
 	  return _react2.default.createElement(
 	    'div',
-	    { className: 'plantview' },
+	    { className: 'container-fluid' },
 	    _react2.default.createElement(
 	      'div',
-	      { id: 'plantviewContent', className: 'content' },
-	      _react2.default.createElement(
-	        'div',
-	        { id: 'drawingArea' },
-	        monitors.map(function (monitor) {
-	          return _react2.default.createElement(_Monitor2.default, { key: monitor.get('id'), state: monitor,
+	      { className: 'row' },
+	      monitors.map(function (monitor) {
+	        return _react2.default.createElement(
+	          'div',
+	          { key: monitor.get('id'), className: 'col-lg-3 col-md-6' },
+	          _react2.default.createElement(_Monitor2.default, { state: monitor,
 	            onClick: function onClick() {
 	              return onMonitorClick(monitor.get('id'));
 	            },
-	            className: isEditing ? "default edit" : "default" });
-	        })
-	      ),
-	      _react2.default.createElement('img', { id: 'bg', src: currentArea.ImgUrl })
+	            className: isEditing ? "default edit" : "default" })
+	        );
+	      })
 	    )
 	  );
 	};
 
 	// return container component connected woth the store
+
 	exports.default = (0, _reactRedux.connect)(function (state) {
 	  return {
 	    monitors: state.monitors,
@@ -23445,6 +23308,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.Monitor = undefined;
 
 	var _react = __webpack_require__(2);
 
@@ -23456,14 +23320,40 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Monitor = function Monitor(_ref) {
+	var Monitor = exports.Monitor = function Monitor(_ref) {
 	  var state = _ref.state;
 	  var onClick = _ref.onClick;
 	  var onMove = _ref.onMove;
 	  return _react2.default.createElement(
 	    'div',
-	    { onClick: onClick },
-	    state.get('name')
+	    { className: 'monitor panel panel-primary' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'panel-heading' },
+	      _react2.default.createElement(
+	        'div',
+	        { className: 'row' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-xs-3' },
+	          _react2.default.createElement('span', { className: 'glyphicon glyphicon-flash', 'aria-hidden': 'true' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'col-xs-9 text-right' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'huge' },
+	            state.get('name')
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            null,
+	            'Detalhes'
+	          )
+	        )
+	      )
+	    )
 	  );
 	};
 
@@ -23485,20 +23375,20 @@
 
 	var _monitors2 = _interopRequireDefault(_monitors);
 
-	var _areas = __webpack_require__(205);
+	var _rooms = __webpack_require__(205);
 
-	var _areas2 = _interopRequireDefault(_areas);
+	var _rooms2 = _interopRequireDefault(_rooms);
 
-	var _selectedArea = __webpack_require__(206);
+	var _selectedRoom = __webpack_require__(206);
 
-	var _selectedArea2 = _interopRequireDefault(_selectedArea);
+	var _selectedRoom2 = _interopRequireDefault(_selectedRoom);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var reducers = (0, _redux.combineReducers)({
 	  monitors: _monitors2.default,
-	  areas: _areas2.default,
-	  selectedArea: _selectedArea2.default
+	  rooms: _rooms2.default,
+	  selectedRoom: _selectedRoom2.default
 	});
 
 	exports.default = reducers;
@@ -23517,7 +23407,7 @@
 
 	var _util = __webpack_require__(204);
 
-	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: 1, name: "Monitor 1" }), (0, _immutable.Map)({ id: 2, name: "Monitor 2" }), (0, _immutable.Map)({ id: 3, name: "Monitor 3" }), (0, _immutable.Map)({ id: 4, name: "Monitor 4" })]);
+	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: 1, name: "Monitor 1", type: "light", roomId: 1 }), (0, _immutable.Map)({ id: 2, name: "Monitor 2", type: "air", roomId: 1 }), (0, _immutable.Map)({ id: 3, name: "Monitor 3", type: "light", roomId: 2 }), (0, _immutable.Map)({ id: 4, name: "Monitor 4", type: "air", roomId: 2 })]);
 
 	var monitors = function monitors() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? intialState : arguments[0];
@@ -28553,44 +28443,49 @@
 
 	var _util = __webpack_require__(204);
 
-	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: (0, _util.uid)(), name: "Estações 01 a 10" }), (0, _immutable.Map)({ id: (0, _util.uid)(), name: "Estações 11 a 20" }), (0, _immutable.Map)({ id: (0, _util.uid)(), name: "Conferencia" }), (0, _immutable.Map)({ id: (0, _util.uid)(), name: "Expedição" })]);
+	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: 1, name: "Suite 1" }), (0, _immutable.Map)({ id: 2, name: "Suite 2" }), (0, _immutable.Map)({ id: 3, name: "Sala" }), (0, _immutable.Map)({ id: 4, name: "Cozinha" })]);
 
-	var areas = function areas() {
+	var rooms = function rooms() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? intialState : arguments[0];
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case 'AREA_ADD':
-	      return state.push((0, _immutable.Map)({ id: action.data.id, name: action.data.name }));
 	    default:
 	      return state;
 	  }
 	};
 
-	exports.default = areas;
+	exports.default = rooms;
 
 /***/ },
 /* 206 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var selectedArea = function selectedArea() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
+
+	var _immutable = __webpack_require__(203);
+
+	var _util = __webpack_require__(204);
+
+	var intialState = (0, _immutable.Map)({ id: 0, name: "" });
+
+	var selectedRoom = function selectedRoom() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? intialState : arguments[0];
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case 'AREA_SELECT':
+	    case 'ROOM_SELECT':
 	      return action.data;
 	    default:
 	      return state;
 	  }
 	};
 
-	exports.default = selectedArea;
+	exports.default = selectedRoom;
 
 /***/ }
 /******/ ]);

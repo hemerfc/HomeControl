@@ -65,19 +65,19 @@
 
 	var _reactRedux = __webpack_require__(188);
 
-	var _NavBar = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/container/NavBar\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _NavBar = __webpack_require__(197);
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 
-	var _MainView = __webpack_require__(197);
+	var _MainView = __webpack_require__(199);
 
 	var _MainView2 = _interopRequireDefault(_MainView);
 
-	var _reducers = __webpack_require__(200);
+	var _reducers = __webpack_require__(201);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
-	var _actions = __webpack_require__(199);
+	var _actions = __webpack_require__(198);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23082,6 +23082,165 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.NavBar = undefined;
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(188);
+
+	var _actions = __webpack_require__(198);
+
+	var actions = _interopRequireWildcard(_actions);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var NavBar = exports.NavBar = function NavBar(_ref) {
+	  var isEditing = _ref.isEditing;
+	  var rooms = _ref.rooms;
+	  var selectedRoom = _ref.selectedRoom;
+	  var selectRoom = _ref.selectRoom;
+	  var exit = _ref.exit;
+	  return _react2.default.createElement(
+	    'nav',
+	    { className: 'navbar-default navbar-static-top navbar-inverse' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'navbar-header' },
+	      _react2.default.createElement(
+	        'button',
+	        { type: 'button', className: 'navbar-toggle collapsed', 'data-toggle': 'collapse', 'data-target': '#navbar' },
+	        _react2.default.createElement(
+	          'span',
+	          { className: 'sr-only' },
+	          'Toggle navigation'
+	        ),
+	        _react2.default.createElement('span', { className: 'icon-bar' }),
+	        _react2.default.createElement('span', { className: 'icon-bar' }),
+	        _react2.default.createElement('span', { className: 'icon-bar' })
+	      ),
+	      _react2.default.createElement(
+	        'a',
+	        { className: 'main-icon' },
+	        _react2.default.createElement('span', { className: 'glyphicon glyphicon-home', 'aria-hidden': 'true' })
+	      ),
+	      _react2.default.createElement(
+	        'a',
+	        { className: 'navbar-brand', href: '#' },
+	        'Home'
+	      )
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      { id: 'navbar', className: 'navbar-collapse collapse' },
+	      _react2.default.createElement(
+	        'ul',
+	        { className: 'nav navbar-nav' },
+	        _react2.default.createElement(
+	          'li',
+	          { className: 'dropdown' },
+	          _react2.default.createElement(
+	            'a',
+	            { href: '#', className: 'dropdown-toggle', 'data-toggle': 'dropdown',
+	              role: 'button', 'aria-haspopup': 'true', 'aria-expanded': 'false' },
+	            'Comodo: ',
+	            selectedRoom.get('name'),
+	            _react2.default.createElement('span', { className: 'caret' })
+	          ),
+	          _react2.default.createElement(
+	            'ul',
+	            { className: 'dropdown-menu' },
+	            rooms.map(function (room) {
+	              return _react2.default.createElement(
+	                'li',
+	                { key: room.get('id') },
+	                _react2.default.createElement(
+	                  'a',
+	                  { href: '#', onClick: function onClick() {
+	                      return selectRoom(room);
+	                    } },
+	                  room.get('name')
+	                )
+	              );
+	            }),
+	            _react2.default.createElement('li', { role: 'separator', className: 'divider' }),
+	            _react2.default.createElement(
+	              'li',
+	              null,
+	              _react2.default.createElement(
+	                'a',
+	                { href: '#' },
+	                'Ajustes'
+	              )
+	            )
+	          )
+	        )
+	      ),
+	      _react2.default.createElement(
+	        'ul',
+	        { className: 'nav navbar-nav navbar-right' },
+	        _react2.default.createElement(
+	          'li',
+	          null,
+	          _react2.default.createElement(
+	            'a',
+	            { href: '#', onClick: function onClick() {
+	                return exit();
+	              } },
+	            'Sair'
+	          )
+	        )
+	      )
+	    )
+	  );
+	};
+
+	// return container component connected woth the store
+	exports.default = (0, _reactRedux.connect)(function (state) {
+	  return {
+	    rooms: state.rooms,
+	    selectedRoom: state.selectedRoom
+	  };
+	}, function (dispatch) {
+	  return {
+	    selectRoom: function selectRoom(room) {
+	      dispatch(actions.roomSelect(room));
+	    },
+	    exit: function exit() {
+	      //dispatch(exit())
+	    }
+	  };
+	})(NavBar);
+
+/***/ },
+/* 198 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var roomSelect = exports.roomSelect = function roomSelect(id) {
+	  return { type: 'ROOM_SELECT', data: id };
+	};
+
+	var monitorSelect = exports.monitorSelect = function monitorSelect(id) {
+	  return { type: 'MONITOR_SELECT', data: id };
+	};
+
+/***/ },
+/* 199 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	exports.MainView = undefined;
 
 	var _react = __webpack_require__(2);
@@ -23090,11 +23249,11 @@
 
 	var _reactRedux = __webpack_require__(188);
 
-	var _Monitor = __webpack_require__(198);
+	var _Monitor = __webpack_require__(200);
 
 	var _Monitor2 = _interopRequireDefault(_Monitor);
 
-	var _actions = __webpack_require__(199);
+	var _actions = __webpack_require__(198);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23141,7 +23300,7 @@
 	})(MainView);
 
 /***/ },
-/* 198 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23157,7 +23316,7 @@
 
 	var _reactRedux = __webpack_require__(188);
 
-	var _actions = __webpack_require__(199);
+	var _actions = __webpack_require__(198);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23201,24 +23360,7 @@
 	exports.default = Monitor;
 
 /***/ },
-/* 199 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var roomSelect = exports.roomSelect = function roomSelect(id) {
-	  return { type: 'ROOM_SELECT', data: id };
-	};
-
-	var monitorSelect = exports.monitorSelect = function monitorSelect(id) {
-	  return { type: 'MONITOR_SELECT', data: id };
-	};
-
-/***/ },
-/* 200 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23229,15 +23371,15 @@
 
 	var _redux = __webpack_require__(173);
 
-	var _monitors = __webpack_require__(201);
+	var _monitors = __webpack_require__(202);
 
 	var _monitors2 = _interopRequireDefault(_monitors);
 
-	var _rooms = __webpack_require__(204);
+	var _rooms = __webpack_require__(205);
 
 	var _rooms2 = _interopRequireDefault(_rooms);
 
-	var _selectedRoom = __webpack_require__(205);
+	var _selectedRoom = __webpack_require__(206);
 
 	var _selectedRoom2 = _interopRequireDefault(_selectedRoom);
 
@@ -23252,7 +23394,7 @@
 	exports.default = reducers;
 
 /***/ },
-/* 201 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23261,11 +23403,11 @@
 	  value: true
 	});
 
-	var _immutable = __webpack_require__(202);
+	var _immutable = __webpack_require__(203);
 
-	var _util = __webpack_require__(203);
+	var _util = __webpack_require__(204);
 
-	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: 1, name: "Monitor 1", roomId: 1 }), (0, _immutable.Map)({ id: 2, name: "Monitor 2", roomId: 1 }), (0, _immutable.Map)({ id: 3, name: "Monitor 3", roomId: 2 }), (0, _immutable.Map)({ id: 4, name: "Monitor 4", roomId: 2 })]);
+	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: 1, name: "Monitor 1", type: "light", roomId: 1 }), (0, _immutable.Map)({ id: 2, name: "Monitor 2", type: "air", roomId: 1 }), (0, _immutable.Map)({ id: 3, name: "Monitor 3", type: "light", roomId: 2 }), (0, _immutable.Map)({ id: 4, name: "Monitor 4", type: "air", roomId: 2 })]);
 
 	var monitors = function monitors() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? intialState : arguments[0];
@@ -23290,7 +23432,7 @@
 	exports.default = monitors;
 
 /***/ },
-/* 202 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -28274,7 +28416,7 @@
 	}));
 
 /***/ },
-/* 203 */
+/* 204 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28288,7 +28430,7 @@
 	};
 
 /***/ },
-/* 204 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28297,9 +28439,9 @@
 	  value: true
 	});
 
-	var _immutable = __webpack_require__(202);
+	var _immutable = __webpack_require__(203);
 
-	var _util = __webpack_require__(203);
+	var _util = __webpack_require__(204);
 
 	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: 1, name: "Suite 1" }), (0, _immutable.Map)({ id: 2, name: "Suite 2" }), (0, _immutable.Map)({ id: 3, name: "Sala" }), (0, _immutable.Map)({ id: 4, name: "Cozinha" })]);
 
@@ -28316,7 +28458,7 @@
 	exports.default = rooms;
 
 /***/ },
-/* 205 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28325,9 +28467,9 @@
 	  value: true
 	});
 
-	var _immutable = __webpack_require__(202);
+	var _immutable = __webpack_require__(203);
 
-	var _util = __webpack_require__(203);
+	var _util = __webpack_require__(204);
 
 	var intialState = (0, _immutable.Map)({ id: 0, name: "" });
 
