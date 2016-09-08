@@ -1,12 +1,31 @@
 html {
     position: relative;
     min-height: 100%;
-    background: #eee;
+    background: #333;
 }
 
 body {
     min-height: 100%;
-    background: #eee;
+    background: #333;
+}
+
+.main-icon {
+  font-size: 30px;
+  color: #fff;
+  float: left;
+  padding: 5px 0px 0px 10px;
+}
+
+.monitor .huge {
+    font-size: 40px;
+}
+
+.monitor .glyphicon {
+    font-size: 72px;
+}
+
+#root .container-fluid {
+  padding-top: 15px;
 }
 
 /* FORM SIGNIN */

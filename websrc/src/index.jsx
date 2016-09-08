@@ -13,8 +13,8 @@ function render() {
   ReactDOM.render(
     <Provider store={store}>
       <div>
-        <MainView />
         <NavBar />
+        <MainView />
       </div>
     </Provider>,
     document.getElementById('root')

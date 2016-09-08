@@ -18,6 +18,6 @@ module.exports = {
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: '../public'
+    contentBase: '../public/'
   }
 };

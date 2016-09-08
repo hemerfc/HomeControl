@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
 import monitors from './monitors'
-import areas from './areas'
-import selectedArea from './selectedArea'
+import rooms from './rooms'
+import selectedRoom from './selectedRoom'
 
 const reducers = combineReducers({
   monitors,
-  areas,
-  selectedArea
+  rooms,
+  selectedRoom
 })
 
 export default reducers
