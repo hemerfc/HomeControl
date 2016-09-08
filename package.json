@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "postinstall": "cd websrc && npm install && node_modules/.bin/webpack"
+    "postinstall": "cd websrc && npm install && ../node_modules/.bin/webpack"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
