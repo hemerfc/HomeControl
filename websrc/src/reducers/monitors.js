@@ -2,16 +2,22 @@ import { List, Map } from 'immutable'
 import { uid } from "../util"
 
 const intialState = List([
-  Map({ id: 1, name: "Monitor 1", type:"light", roomId:1 }),
-  Map({ id: 2, name: "Monitor 2", type:"air", roomId:1 }),
-  Map({ id: 3, name: "Monitor 3", type:"light", roomId:2 }),
-  Map({ id: 4, name: "Monitor 4", type:"air", roomId:2 })
+  Map({ id: 1, name: "Monitor 1", type:"light", roomId:1, value:"on" }),
+  Map({ id: 2, name: "Monitor 2", type:"air", roomId:1, value:"20" }),
+  Map({ id: 3, name: "Monitor 3", type:"light", roomId:1, value:"off" }),
+  Map({ id: 4, name: "Monitor 4", type:"air", roomId:1, value:"" })
 ])
 
 const monitors = (state = intialState, action) => {
   switch (action.type) {
-    case 'MONITOR_SELECT':
-      return state.push(Map({id: uid(), name: action.data.name }))
+    case 'MONITOR_SELECT':    
+      return state.map(t => {
+        if(t.get('id') == action.data) {
+          return t.update('value', (value) => value=="on"?"off":"on");
+        } else {
+          return t;
+        }
+      });
     case 'MONITOR_MOVE':
       return state.map(t => {
         if(t.get('id') == action.data.id) {

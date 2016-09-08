@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import Monitor from '../presenter/Monitor'
+import LightMonitor from '../presenter/LightMonitor'
 import { monitorSelect } from '../../actions'
 
 export const MainView = ({ monitors, isEditing, currentArea, onMonitorClick }) => (
   <div className="container-fluid">
     <div className="row">
       {monitors.map(monitor =>
-        <div  key={monitor.get('id')} className="col-lg-3 col-md-6">
-            <Monitor state={monitor}
+        <div key={monitor.get('id')} className="col-lg-3 col-md-6">
+            <LightMonitor state={monitor}
                   onClick={() => onMonitorClick(monitor.get('id'))}
                   className={isEditing?"default edit":"default"} />
         </div>

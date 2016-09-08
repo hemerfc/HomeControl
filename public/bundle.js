@@ -23249,9 +23249,9 @@
 
 	var _reactRedux = __webpack_require__(188);
 
-	var _Monitor = __webpack_require__(200);
+	var _LightMonitor = __webpack_require__(200);
 
-	var _Monitor2 = _interopRequireDefault(_Monitor);
+	var _LightMonitor2 = _interopRequireDefault(_LightMonitor);
 
 	var _actions = __webpack_require__(198);
 
@@ -23272,7 +23272,7 @@
 	        return _react2.default.createElement(
 	          'div',
 	          { key: monitor.get('id'), className: 'col-lg-3 col-md-6' },
-	          _react2.default.createElement(_Monitor2.default, { state: monitor,
+	          _react2.default.createElement(_LightMonitor2.default, { state: monitor,
 	            onClick: function onClick() {
 	              return onMonitorClick(monitor.get('id'));
 	            },
@@ -23308,7 +23308,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Monitor = undefined;
+	exports.LightMonitor = undefined;
 
 	var _react = __webpack_require__(2);
 
@@ -23320,13 +23320,13 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Monitor = exports.Monitor = function Monitor(_ref) {
+	var LightMonitor = exports.LightMonitor = function LightMonitor(_ref) {
 	  var state = _ref.state;
 	  var onClick = _ref.onClick;
 	  var onMove = _ref.onMove;
 	  return _react2.default.createElement(
 	    'div',
-	    { className: 'monitor panel panel-primary' },
+	    { className: 'monitor panel panel-primary', onClick: onClick },
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'panel-heading' },
@@ -23336,7 +23336,8 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-xs-3' },
-	          _react2.default.createElement('span', { className: 'glyphicon glyphicon-flash', 'aria-hidden': 'true' })
+	          _react2.default.createElement('img', { className: 'icon',
+	            src: state.get('value') == "on" ? "content/img/light-on.png" : "content/img/light-off.png" })
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -23349,7 +23350,8 @@
 	          _react2.default.createElement(
 	            'div',
 	            null,
-	            'Detalhes'
+	            'Detalhes ',
+	            state.get('value')
 	          )
 	        )
 	      )
@@ -23357,7 +23359,7 @@
 	  );
 	};
 
-	exports.default = Monitor;
+	exports.default = LightMonitor;
 
 /***/ },
 /* 201 */
@@ -23407,7 +23409,7 @@
 
 	var _util = __webpack_require__(204);
 
-	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: 1, name: "Monitor 1", type: "light", roomId: 1 }), (0, _immutable.Map)({ id: 2, name: "Monitor 2", type: "air", roomId: 1 }), (0, _immutable.Map)({ id: 3, name: "Monitor 3", type: "light", roomId: 2 }), (0, _immutable.Map)({ id: 4, name: "Monitor 4", type: "air", roomId: 2 })]);
+	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: 1, name: "Monitor 1", type: "light", roomId: 1, value: "on" }), (0, _immutable.Map)({ id: 2, name: "Monitor 2", type: "air", roomId: 1, value: "20" }), (0, _immutable.Map)({ id: 3, name: "Monitor 3", type: "light", roomId: 1, value: "off" }), (0, _immutable.Map)({ id: 4, name: "Monitor 4", type: "air", roomId: 1, value: "" })]);
 
 	var monitors = function monitors() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? intialState : arguments[0];
@@ -23415,7 +23417,15 @@
 
 	  switch (action.type) {
 	    case 'MONITOR_SELECT':
-	      return state.push((0, _immutable.Map)({ id: (0, _util.uid)(), name: action.data.name }));
+	      return state.map(function (t) {
+	        if (t.get('id') == action.data) {
+	          return t.update('value', function (value) {
+	            return value == "on" ? "off" : "on";
+	          });
+	        } else {
+	          return t;
+	        }
+	      });
 	    case 'MONITOR_MOVE':
 	      return state.map(function (t) {
 	        if (t.get('id') == action.data.id) {
