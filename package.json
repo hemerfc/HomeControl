@@ -11,8 +11,8 @@
   "scripts": {
     "start": "node index.js",
     "watch": "cd websrc && start webpack --progress --colors --watch",
-    "postinstall": "cd websrc && npm install && websrc/node_modules/.bin/webpack --progress --colors",
-    "dev": "npm run watch && npm run start"    
+    "postinstall": "cd websrc && npm install && websrc/node_modules/.bin/webpack",
+    "dev": "npm run watch && npm run start"
   },
   "dependencies": {
     "hapi": "^13.0.0",
