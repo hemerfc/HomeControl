@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import LightMonitor from '../presenter/LightMonitor'
-import { monitorSelect } from '../../actions'
+import { MonitorUpdate } from '../../actions'
 
-export const MainView = ({ monitors, isEditing, currentArea, onMonitorClick }) => (
+export const MainView = ({ monitors, isEditing, currentArea, onMonitorUpdate }) => (
   <div className="container-fluid">
     <div className="row">
       {monitors.map(monitor =>
         <div key={monitor.get('id')} className="col-lg-3 col-md-6">
             <LightMonitor state={monitor}
-                  onClick={() => onMonitorClick(monitor.get('id'))}
+                  onChange={(value) => onMonitorUpdate(monitor.get('id'), value)}
                   className={isEditing?"default edit":"default"} />
         </div>
       )}
@@ -29,8 +29,8 @@ export default connect(
 },
 (dispatch) => {
   return {
-    onMonitorClick: (id) => {
-      dispatch(monitorSelect(id))
+    onMonitorUpdate: (id, value) => {
+      dispatch(MonitorUpdate(id, value))
     }
   }
 })(MainView)

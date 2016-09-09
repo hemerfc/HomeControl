@@ -2,12 +2,12 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { areaSelect } from '../../actions'
 
-export const LightMonitor = ({ state, onClick, onMove }) => (
+export const LightMonitor = ({ state, onChange, onMove }) => (
   <div className="monitor panel panel-primary">
     <div className="panel-heading">
       <div className="row">
-        <div className="col-xs-3">          
-            <img className="icon" 
+        <div className="col-xs-3">
+            <img className="icon"
                  src={state.get('value') == "on"?
                     "content/img/light-on.png":
                     "content/img/light-off.png"} />

@@ -10,10 +10,10 @@ const intialState = List([
 
 const monitors = (state = intialState, action) => {
   switch (action.type) {
-    case 'MONITOR_SELECT':    
+    case 'MONITOR_UPDATE':
       return state.map(t => {
-        if(t.get('id') == action.data) {
-          return t.update('value', (value) => value=="on"?"off":"on");
+        if(t.get('id') == action.data.id) {
+          return t.set('value', action.data.value=="on"?"on":"off");
         } else {
           return t;
         }

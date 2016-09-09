@@ -23228,8 +23228,8 @@
 	  return { type: 'ROOM_SELECT', data: id };
 	};
 
-	var monitorSelect = exports.monitorSelect = function monitorSelect(id) {
-	  return { type: 'MONITOR_SELECT', data: id };
+	var MonitorUpdate = exports.MonitorUpdate = function MonitorUpdate(id, value) {
+	  return { type: 'MONITOR_UPDATE', data: { id: id, value: value } };
 	};
 
 /***/ },
@@ -23261,7 +23261,7 @@
 	  var monitors = _ref.monitors;
 	  var isEditing = _ref.isEditing;
 	  var currentArea = _ref.currentArea;
-	  var onMonitorClick = _ref.onMonitorClick;
+	  var onMonitorUpdate = _ref.onMonitorUpdate;
 	  return _react2.default.createElement(
 	    'div',
 	    { className: 'container-fluid' },
@@ -23273,8 +23273,8 @@
 	          'div',
 	          { key: monitor.get('id'), className: 'col-lg-3 col-md-6' },
 	          _react2.default.createElement(_LightMonitor2.default, { state: monitor,
-	            onClick: function onClick() {
-	              return onMonitorClick(monitor.get('id'));
+	            onChange: function onChange(value) {
+	              return onMonitorUpdate(monitor.get('id'), value);
 	            },
 	            className: isEditing ? "default edit" : "default" })
 	        );
@@ -23293,8 +23293,8 @@
 	  };
 	}, function (dispatch) {
 	  return {
-	    onMonitorClick: function onMonitorClick(id) {
-	      dispatch((0, _actions.monitorSelect)(id));
+	    onMonitorUpdate: function onMonitorUpdate(id, value) {
+	      dispatch((0, _actions.MonitorUpdate)(id, value));
 	    }
 	  };
 	})(MainView);
@@ -23322,11 +23322,11 @@
 
 	var LightMonitor = exports.LightMonitor = function LightMonitor(_ref) {
 	  var state = _ref.state;
-	  var onClick = _ref.onClick;
+	  var onChange = _ref.onChange;
 	  var onMove = _ref.onMove;
 	  return _react2.default.createElement(
 	    'div',
-	    { className: 'monitor panel panel-primary', onClick: onClick },
+	    { className: 'monitor panel panel-primary' },
 	    _react2.default.createElement(
 	      'div',
 	      { className: 'panel-heading' },
@@ -23349,9 +23349,32 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
+	            { className: "toggle btn btn-primary " + (state.get('value') === "on" ? " on" : " off"),
+	              'data-toggle': 'toggle', style: { width: '102px', height: '34px' },
+	              onClick: function onClick(e) {
+	                onChange(state.get('value') === "on" ? "off" : "on");
+	                e.preventDefault();
+	              } },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'toggle-group' },
+	              _react2.default.createElement(
+	                'label',
+	                { className: 'btn btn-primary toggle-on' },
+	                'Ligado'
+	              ),
+	              _react2.default.createElement(
+	                'label',
+	                { className: 'btn btn-default active toggle-off' },
+	                'Desligado'
+	              ),
+	              _react2.default.createElement('span', { className: 'toggle-handle btn btn-default' })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
 	            null,
-	            'Detalhes ',
-	            state.get('value')
+	            'Detalhes'
 	          )
 	        )
 	      )
@@ -23416,12 +23439,10 @@
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case 'MONITOR_SELECT':
+	    case 'MONITOR_UPDATE':
 	      return state.map(function (t) {
-	        if (t.get('id') == action.data) {
-	          return t.update('value', function (value) {
-	            return value == "on" ? "off" : "on";
-	          });
+	        if (t.get('id') == action.data.id) {
+	          return t.set('value', action.data.value == "on" ? "on" : "off");
 	        } else {
 	          return t;
 	        }
