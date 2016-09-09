@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="description" content="">
     <meta name="author" content="Hemerson F. Camargo">
-    <title>Supervisorio - Aguia Sistemas</title>
+    <title>HomeControl</title>
 
-    <link rel="stylesheet" href="/content/css/bootstrap.css">
+    <link rel="stylesheet" href="content/css/bootstrap.css">
     <link rel="stylesheet" href="/content/bootstrap-datetimepicker.css" />
     <link rel="stylesheet" href="/content/bootstrap-toggle.min.css" />
     <link rel="stylesheet" href="/content/css/app.css">
@@ -26,7 +26,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/content/icon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/content/icon/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/content/icon/favicon-16x16.png">
-    <link rel="manifest" href="/content/icon/manifest.json">
+    <!--<link rel="manifest" href="/content/icon/manifest.json">-->
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/content/icon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
@@ -34,9 +34,10 @@
 <body>
   <div id="root"></div>
 
-  <script src="bundle.js"></script>
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
   <script type="text/javascript" src="/content/js/jquery.min.js"></script>
   <script type="text/javascript" src="/content/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="/content/js/bootstrap-toggle.min.js"></script>
+  <script src="bundle.js"></script>
 </body>
 </html>

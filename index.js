@@ -1,58 +1,22 @@
-// Copyright 2015-2016, Google, Inc.
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//    http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 'use strict';
 
-// [START server]
-var Hapi = require('hapi');
+const express = require('express')
+const socketIO = require('socket.io');
+const path = require('path')
 
-// Create a server with a host and port
-var server = new Hapi.Server();
-server.connection({
-  host: '0.0.0.0',
-  port: process.env.PORT || 8080
-});
-// [END server]
+const PORT = process.env.PORT || 3000;
+const INDEX = path.join(__dirname, '/public/index.html')
 
-server.register(require('inert'), (err) => {
-  if (err) {
-      throw err;
-  }
+const server = express()
+  .use(express.static( path.join(__dirname, '/public'), {'index': ['index.html']}))
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
-  // public folder
-  server.route({
-      method: 'GET',
-      path: '/{param*}',
-      handler: {
-          directory: {
-              path: 'public',
-              index: true
-          }
-      }
-  });
 
-  // api
-  server.route({
-    method: 'GET',
-    path: '/hello',
-    handler: function (request, reply) {
-      reply('Hello World! Hapi.js on Google App Engine.');
-    }
-  });
+const io = socketIO(server);
+
+io.on('connection', (socket) => {
+  console.log('Client connected')
+  socket.on('disconnect', () => console.log('Client disconnected'))
 });
 
-// [START server_start]
-server.start(function () {
-  console.log('Server running at:', server.info.uri);
-});
-// [END server_start]
+setInterval(() => io.emit('time', new Date().toTimeString()), 1000)

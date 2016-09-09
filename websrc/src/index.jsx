@@ -23,3 +23,10 @@ function render() {
 
 render()
 store.subscribe(render)
+
+
+const socket = io() //io.connect(process.env.SOCKET_URL)
+
+socket.on('time', function(timeString) {
+  console.log(timeString)
+});

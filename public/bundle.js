@@ -99,6 +99,12 @@
 	render();
 	store.subscribe(render);
 
+	var socket = io(); //io.connect(process.env.SOCKET_URL)
+
+	socket.on('time', function (timeString) {
+	  console.log(timeString);
+	});
+
 /***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {

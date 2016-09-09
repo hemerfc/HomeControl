@@ -1,10 +1,10 @@
 {
-  "name": "appengine-hapi",
-  "description": "An example of running Hapi.js on Google App Engine.",
+  "name": "HomeControl",
+  "description": "HomeControl Server",
   "version": "0.0.1",
   "private": true,
   "license": "Apache Version 2.0",
-  "author": "Google Inc.",
+  "author": "Hemerson F. Camargo",
   "engines": {
     "node": "~4.2"
   },
@@ -15,7 +15,9 @@
     "dev": "npm run watch && npm run start"
   },
   "dependencies": {
+    "express": "4.14.0",
     "hapi": "^13.0.0",
-    "inert": "^4.0.2"
+    "inert": "^4.0.2",
+    "socket.io": "1.4.8"
   }
 }
