@@ -1,13 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import NavBar from './components/container/NavBar'
 import MainView from './components/container/MainView'
 import reducer from './reducers'
 import { areaAddRange } from './actions'
+import { createStore, applyMiddleware } from 'redux';
+import createSocketIoMiddleware from 'redux-socket.io';
 
-const store = createStore(reducer)
+// bin socket.io to actions
+let socket = io()
+let socketIoMiddleware = createSocketIoMiddleware(socket, "server/");
+let store = applyMiddleware(socketIoMiddleware)(createStore)(reducer);
 
 function render() {
   ReactDOM.render(
@@ -23,10 +27,3 @@ function render() {
 
 render()
 store.subscribe(render)
-
-
-const socket = io() //io.connect(process.env.SOCKET_URL)
-
-socket.on('time', function(timeString) {
-  console.log(timeString)
-});
