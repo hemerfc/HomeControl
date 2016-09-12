@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import LightMonitor from '../presenter/LightMonitor'
 import { MonitorUpdate } from '../../actions'
+import socketEvents from '../../util/socketEvents'
 
 export const MainView = ({ monitors, isEditing, currentArea, onMonitorUpdate }) => (
   <div className="container-fluid">
@@ -30,7 +31,8 @@ export default connect(
 (dispatch) => {
   return {
     onMonitorUpdate: (id, value) => {
-      dispatch(MonitorUpdate(id, value))
+      socketEvents.updateMonitor(id, value)
+      //dispatch(MonitorUpdate(id, value))
     }
   }
 })(MainView)

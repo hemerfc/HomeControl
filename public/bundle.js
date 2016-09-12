@@ -71,7 +71,7 @@
 
 	var _MainView2 = _interopRequireDefault(_MainView);
 
-	var _reducers = __webpack_require__(201);
+	var _reducers = __webpack_require__(202);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -79,15 +79,19 @@
 
 	var _redux = __webpack_require__(180);
 
-	var _reduxSocket = __webpack_require__(207);
+	var _reduxSocket = __webpack_require__(208);
 
 	var _reduxSocket2 = _interopRequireDefault(_reduxSocket);
+
+	var _socketEvents = __webpack_require__(201);
+
+	var _socketEvents2 = _interopRequireDefault(_socketEvents);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// bin socket.io to actions
-	var socket = io();
-	var socketIoMiddleware = (0, _reduxSocket2.default)(socket, "server/");
+
+	var socketIoMiddleware = (0, _reduxSocket2.default)(_socketEvents2.default.socket, "server/");
 	var store = (0, _redux.applyMiddleware)(socketIoMiddleware)(_redux.createStore)(_reducers2.default);
 
 	function render() {
@@ -23262,6 +23266,10 @@
 
 	var _actions = __webpack_require__(198);
 
+	var _socketEvents = __webpack_require__(201);
+
+	var _socketEvents2 = _interopRequireDefault(_socketEvents);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var MainView = exports.MainView = function MainView(_ref) {
@@ -23301,7 +23309,8 @@
 	}, function (dispatch) {
 	  return {
 	    onMonitorUpdate: function onMonitorUpdate(id, value) {
-	      dispatch((0, _actions.MonitorUpdate)(id, value));
+	      _socketEvents2.default.updateMonitor(id, value);
+	      //dispatch(MonitorUpdate(id, value))
 	    }
 	  };
 	})(MainView);
@@ -23393,6 +23402,32 @@
 
 /***/ },
 /* 201 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	//import io from 'socket.io-client'
+	var socket = io();
+
+	socket.on('action', function (action) {
+	  return console.log("received ", action);
+	});
+
+	var scoketEvents = {
+	  socket: socket,
+	  updateMonitor: function updateMonitor(id, value) {
+	    var action = { type: 'MONITOR_UPDATE', data: { id: id, value: value } };
+	    socket.emit('action', action);
+	  }
+	};
+
+	exports.default = scoketEvents;
+
+/***/ },
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23403,15 +23438,15 @@
 
 	var _redux = __webpack_require__(180);
 
-	var _monitors = __webpack_require__(202);
+	var _monitors = __webpack_require__(203);
 
 	var _monitors2 = _interopRequireDefault(_monitors);
 
-	var _rooms = __webpack_require__(205);
+	var _rooms = __webpack_require__(206);
 
 	var _rooms2 = _interopRequireDefault(_rooms);
 
-	var _selectedRoom = __webpack_require__(206);
+	var _selectedRoom = __webpack_require__(207);
 
 	var _selectedRoom2 = _interopRequireDefault(_selectedRoom);
 
@@ -23440,7 +23475,7 @@
 	exports.default = reducers;
 
 /***/ },
-/* 202 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23449,9 +23484,9 @@
 	  value: true
 	});
 
-	var _immutable = __webpack_require__(203);
+	var _immutable = __webpack_require__(204);
 
-	var _util = __webpack_require__(204);
+	var _util = __webpack_require__(205);
 
 	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: 1, name: "Monitor 1", type: "light", roomId: 1, value: "on" }), (0, _immutable.Map)({ id: 2, name: "Monitor 2", type: "air", roomId: 1, value: "20" }), (0, _immutable.Map)({ id: 3, name: "Monitor 3", type: "light", roomId: 1, value: "off" }), (0, _immutable.Map)({ id: 4, name: "Monitor 4", type: "air", roomId: 1, value: "" })]);
 
@@ -23460,7 +23495,7 @@
 	  var action = arguments[1];
 
 	  switch (action.type) {
-	    case 'MONITOR_UPDATE_VALUE':
+	    case 'MONITOR_UPDATE':
 	      return state.map(function (t) {
 	        if (t.get('id') == action.data.id) {
 	          return t.set('value', action.data.value);
@@ -23484,7 +23519,7 @@
 	exports.default = monitors;
 
 /***/ },
-/* 203 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -28468,7 +28503,7 @@
 	}));
 
 /***/ },
-/* 204 */
+/* 205 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28482,7 +28517,7 @@
 	};
 
 /***/ },
-/* 205 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28491,9 +28526,9 @@
 	  value: true
 	});
 
-	var _immutable = __webpack_require__(203);
+	var _immutable = __webpack_require__(204);
 
-	var _util = __webpack_require__(204);
+	var _util = __webpack_require__(205);
 
 	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: 1, name: "Suite 1" }), (0, _immutable.Map)({ id: 2, name: "Suite 2" }), (0, _immutable.Map)({ id: 3, name: "Sala" }), (0, _immutable.Map)({ id: 4, name: "Cozinha" })]);
 
@@ -28510,7 +28545,7 @@
 	exports.default = rooms;
 
 /***/ },
-/* 206 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28519,9 +28554,9 @@
 	  value: true
 	});
 
-	var _immutable = __webpack_require__(203);
+	var _immutable = __webpack_require__(204);
 
-	var _util = __webpack_require__(204);
+	var _util = __webpack_require__(205);
 
 	var intialState = (0, _immutable.Map)({ id: 0, name: "" });
 
@@ -28540,7 +28575,7 @@
 	exports.default = selectedRoom;
 
 /***/ },
-/* 207 */
+/* 208 */
 /***/ function(module, exports) {
 
 	'use strict';
