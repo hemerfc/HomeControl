@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function (io) {
   io.on('connection', (socket) => {
     console.log('Client connected')

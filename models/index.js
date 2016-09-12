@@ -1,3 +1,4 @@
+'use strict';
 if (!global.hasOwnProperty('db')) {
   let Sequelize = require('sequelize')
 
