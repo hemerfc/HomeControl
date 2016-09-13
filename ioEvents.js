@@ -5,10 +5,26 @@ module.exports = function (io) {
     console.log('Client connected')
     socket.on('disconnect', () => console.log('Client disconnected'))
 
+    // actions são enviadas pelo/para o navegador
     socket.on('action', (mon) => {
       console.log('received action', mon)
-      let action = {type: 'MONITOR_UPDATE', data: { id: mon.data.id , value: mon.data.value}}
+
+      if(mon.data.value == 'on')
+        io.emit('cmd', { on: '13'})
+      else
+        io.emit('cmd', { off: '13'})
+    })
+
+    /*      */
+
+    // commands são enviadas pelo/para o arduino
+    socket.on('cmd', (mon) => {
+      console.log('received cmd', mon)
+
+      let action = {type: 'MONITOR_UPDATE', data: { id: mon.id , value: mon.value}}
       io.emit('action', action)
+
+      io.emit('cmd', action)
       console.log('emit action', action)
     })
   })
