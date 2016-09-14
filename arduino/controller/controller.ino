@@ -11,10 +11,10 @@ byte ip[] = { 192, 168, 1, 143 };
 byte dn[] = { 8, 8, 8, 8 };
 byte gw[] = { 192, 168, 1 , 10 };
 
-//char hostname[] = "homecontrol1.herokuapp.com";
-//int port = 80;
-char hostname[] = "192.168.1.40";
-int port = 3000;
+char hostname[] = "homecontrol1.herokuapp.com";
+int port = 80;
+//char hostname[] = "192.168.1.40";
+//int port = 3000;
 
 extern String RID;
 extern String Rname;
