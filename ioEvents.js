@@ -10,22 +10,44 @@ module.exports = function (io) {
       console.log('received action', mon)
 
       if(mon.data.value == 'on')
-        io.emit('cmd', { on: '13'})
+        switch (mon.data.id) {
+          case 1:
+            io.emit('cmd', { on: '1'})
+            break;
+          case 2:
+            io.emit('cmd', { on: '2'})
+            break;
+          case 3:
+            io.emit('cmd', { on: '3'})
+            break;
+        }
       else
-        io.emit('cmd', { off: '13'})
+      switch (mon.data.id) {
+        case 1:
+          io.emit('cmd', { off: '1'})
+          break;
+        case 2:
+          io.emit('cmd', { off: '2'})
+          break;
+        case 3:
+          io.emit('cmd', { off: '3'})
+          break;
+      }
     })
-
-    /*      */
 
     // commands são enviadas pelo/para o arduino
     socket.on('cmd', (mon) => {
       console.log('received cmd', mon)
 
-      let action = {type: 'MONITOR_UPDATE', data: { id: mon.id , value: mon.value}}
-      io.emit('action', action)
+      if (typeof(mon.off) !== 'undefined') {
+        let action = {type: 'MONITOR_UPDATE', data: { id: mon.off, value: 'off'}}
+        io.emit('action', action)
+      }
 
-      io.emit('cmd', action)
-      console.log('emit action', action)
+      if (typeof(mon.on) !== 'undefined') {
+        let action = {type: 'MONITOR_UPDATE', data: { id: mon.on, value: 'on'}}
+        io.emit('action', action)
+      }
     })
   })
 }

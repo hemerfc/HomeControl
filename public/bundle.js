@@ -23488,7 +23488,7 @@
 
 	var _util = __webpack_require__(205);
 
-	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: 1, name: "Monitor 1", type: "light", roomId: 1, value: "on" }), (0, _immutable.Map)({ id: 2, name: "Monitor 2", type: "air", roomId: 1, value: "20" }), (0, _immutable.Map)({ id: 3, name: "Monitor 3", type: "light", roomId: 1, value: "off" }), (0, _immutable.Map)({ id: 4, name: "Monitor 4", type: "air", roomId: 1, value: "" })]);
+	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: 1, name: "Monitor Blue", type: "light", roomId: 1, value: "off" }), (0, _immutable.Map)({ id: 2, name: "Monitor Green", type: "air", roomId: 1, value: "off" }), (0, _immutable.Map)({ id: 3, name: "Monitor Red", type: "light", roomId: 1, value: "off" })]);
 
 	var monitors = function monitors() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? intialState : arguments[0];
