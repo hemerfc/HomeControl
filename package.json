@@ -9,10 +9,11 @@
     "node": "~4.2"
   },
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
+    "start:watch": "nodemon index.js",
     "watch": "cd websrc && webpack --progress --colors --watch",
     "postinstall": "cd websrc && npm install && ./node_modules/.bin/webpack",
-    "dev": "npm run watch & npm run start",
+    "dev": "npm run watch & npm run start:watch",
     "test": "node index.js & TASK_PID=$! && mocha test/*.js && kill $TASK_PID"
   },
   "dependencies": {
