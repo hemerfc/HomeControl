@@ -6,7 +6,7 @@ let io = require('socket.io-client');
 let arduinoURL = 'http://0.0.0.0:3000/ctrl';
 let browserURL = 'http://0.0.0.0:3000/browser';
 
-let options ={
+let options = {
   transports: ['websocket'],
   'force new connection': true
 };

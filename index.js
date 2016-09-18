@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, '/public'),
 
   // get reference to namespace arduino
   let controllerClients = []
-  let controllerNSP = io.of('/ctrl');
+  //let controllerNSP = io.of('/ctrl');
 
   // get reference to namespace browser
   let browserClients = []
@@ -45,10 +45,10 @@ app.use(express.static(path.join(__dirname, '/public'),
     })
 
     // subscribe socket io events
-    browserIO(browser, controllerNSP)
+    browserIO(browser, io)
   })
 
-  controllerNSP.on('connection', function(ctrl){
+  io.on('connection', function(ctrl){
     console.info('Controller connected (id=' + ctrl.id + ').')
     controllerClients.push(ctrl)
 
@@ -63,7 +63,7 @@ app.use(express.static(path.join(__dirname, '/public'),
     })
 
     // subscribe socket io events
-    controllerIO(ctrl,browserNSP)
+    controllerIO(ctrl, browserNSP)
   })
 
 //})

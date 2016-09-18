@@ -2,9 +2,9 @@ import { List, Map } from 'immutable'
 import { uid } from "../util"
 
 const intialState = List([
-  Map({ id: 1, name: "Monitor Blue", type:"light", roomId:1, value:"off" }),
-  Map({ id: 2, name: "Monitor Green", type:"air", roomId:1, value:"off" }),
-  Map({ id: 3, name: "Monitor Red", type:"light", roomId:1, value:"off" })
+  Map({ id: 1, name: "Monitor Blue", type:"light", roomId:1, value:0 }),
+  Map({ id: 2, name: "Monitor Green", type:"air", roomId:1, value:0 }),
+  Map({ id: 3, name: "Monitor Red", type:"light", roomId:1, value:0 })
 ])
 
 const monitors = (state = intialState, action) => {

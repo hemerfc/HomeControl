@@ -13,10 +13,13 @@ const CTRLC_GET = 11; // lista de enderecos para serrem retornados
 module.exports = function (ctrl, browserNSP) {
   ctrl.on('cmd', (msg) => {
     console.log('MSG from (', ctrl.id,'):', msg)
-    const cparts = msg.split(",")
+    const cparts = msg.data.split(",")
+    let cmd = parseInt(cparts[0], 10)
+    let port = parseInt(cparts[1], 10)
+    let val = parseInt(cparts[2], 10)
 
     if (cparts !== undefined) {
-      switch (parseInt(cparts[0], 10)) {
+      switch (cmd) {
         case CTRLR_ID:
 
         break
@@ -26,8 +29,8 @@ module.exports = function (ctrl, browserNSP) {
         case CTRLR_RESP:
           // TODO: atualizar o banco de dados
           // encaminha para todos os browsers, arrumar isso aki
-          console.log('SEND action: ', msg)
-          browserNSP.emit('action', {type: 'MONITOR_UPDATE', data: msg } )
+          console.log('SEND action: ', {type: 'MONITOR_UPDATE', data: { id:port, value:val } })
+          browserNSP.emit('action', {type: 'MONITOR_UPDATE', data: { id:port, value:val } } )
         break
       }
     }

@@ -15,7 +15,7 @@ module.exports = function (client, ctrlNSP) {
       if(action.type === 'MONITOR_UPDATE') {
         let msg = String(CTRLC_SET)+','+action.data.id+','+action.data.value
         console.log('SEND cmd=', msg)
-        ctrlNSP.emit('cmd', msg)
+        ctrlNSP.emit('cmd', {data: msg})
       }
     })
   }

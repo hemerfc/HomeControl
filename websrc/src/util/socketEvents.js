@@ -1,5 +1,5 @@
 //import io from 'socket.io-client'
-const socket = io()
+const socket = io('/browser')
 
 socket.on('action', (action) => console.log("received ", action))
 

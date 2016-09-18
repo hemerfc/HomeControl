@@ -23535,10 +23535,10 @@
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: "toggle btn btn-primary " + (state.get('value') === "on" ? " on" : " off"),
+	            { className: "toggle btn btn-primary " + (state.get('value') == 1 ? " on" : " off"),
 	              'data-toggle': 'toggle', style: { width: '102px', height: '34px' },
 	              onClick: function onClick(e) {
-	                onChange(state.get('value') === "on" ? "off" : "on");
+	                onChange(state.get('value') == 1 ? 0 : 1);
 	                e.preventDefault();
 	              } },
 	            _react2.default.createElement(
@@ -23580,7 +23580,7 @@
 	  value: true
 	});
 	//import io from 'socket.io-client'
-	var socket = io();
+	var socket = io('/browser');
 
 	socket.on('action', function (action) {
 	  return console.log("received ", action);
@@ -23658,7 +23658,7 @@
 
 	var _util = __webpack_require__(210);
 
-	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: 1, name: "Monitor Blue", type: "light", roomId: 1, value: "off" }), (0, _immutable.Map)({ id: 2, name: "Monitor Green", type: "air", roomId: 1, value: "off" }), (0, _immutable.Map)({ id: 3, name: "Monitor Red", type: "light", roomId: 1, value: "off" })]);
+	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: 1, name: "Monitor Blue", type: "light", roomId: 1, value: 0 }), (0, _immutable.Map)({ id: 2, name: "Monitor Green", type: "air", roomId: 1, value: 0 }), (0, _immutable.Map)({ id: 3, name: "Monitor Red", type: "light", roomId: 1, value: 0 })]);
 
 	var monitors = function monitors() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? intialState : arguments[0];

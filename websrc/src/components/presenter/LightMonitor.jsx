@@ -15,9 +15,9 @@ export const LightMonitor = ({ state, onChange, onMove }) => (
         <div className="col-xs-9 text-right">
           <div className="huge">{state.get('name')}</div>
           <div className={"toggle btn btn-primary " +
-                          (state.get('value')==="on"?" on":" off") }
+                          (state.get('value')==1?" on":" off") }
                data-toggle="toggle" style={{ width: '102px', height: '34px' }}
-               onClick={(e)=> { onChange(state.get('value')==="on"?"off":"on");
+               onClick={(e)=> { onChange(state.get('value')==1?0:1);
                                e.preventDefault() }}>
             <div className="toggle-group">
               <label className="btn btn-primary toggle-on">Ligado</label>
