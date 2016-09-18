@@ -63,27 +63,27 @@
 
 	var _reactRedux = __webpack_require__(173);
 
-	var _NavBar = __webpack_require__(197);
+	var _NavBar = __webpack_require__(202);
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 
-	var _MainView = __webpack_require__(199);
+	var _MainView = __webpack_require__(204);
 
 	var _MainView2 = _interopRequireDefault(_MainView);
 
-	var _reducers = __webpack_require__(202);
+	var _reducers = __webpack_require__(207);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
-	var _actions = __webpack_require__(198);
+	var _actions = __webpack_require__(203);
 
 	var _redux = __webpack_require__(180);
 
-	var _reduxSocket = __webpack_require__(208);
+	var _reduxSocket = __webpack_require__(213);
 
 	var _reduxSocket2 = _interopRequireDefault(_reduxSocket);
 
-	var _socketEvents = __webpack_require__(201);
+	var _socketEvents = __webpack_require__(206);
 
 	var _socketEvents2 = _interopRequireDefault(_socketEvents);
 
@@ -21661,15 +21661,15 @@
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _isPlainObject = __webpack_require__(182);
+	var _isPlainObject = __webpack_require__(195);
 
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 
-	var _hoistNonReactStatics = __webpack_require__(195);
+	var _hoistNonReactStatics = __webpack_require__(200);
 
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 
-	var _invariant = __webpack_require__(196);
+	var _invariant = __webpack_require__(201);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
@@ -22972,6 +22972,176 @@
 
 /***/ },
 /* 195 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var getPrototype = __webpack_require__(196),
+	    isHostObject = __webpack_require__(198),
+	    isObjectLike = __webpack_require__(199);
+
+	/** `Object#toString` result references. */
+	var objectTag = '[object Object]';
+
+	/** Used for built-in method references. */
+	var funcProto = Function.prototype,
+	    objectProto = Object.prototype;
+
+	/** Used to resolve the decompiled source of functions. */
+	var funcToString = funcProto.toString;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/** Used to infer the `Object` constructor. */
+	var objectCtorString = funcToString.call(Object);
+
+	/**
+	 * Used to resolve the
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objectToString = objectProto.toString;
+
+	/**
+	 * Checks if `value` is a plain object, that is, an object created by the
+	 * `Object` constructor or one with a `[[Prototype]]` of `null`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.8.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 * }
+	 *
+	 * _.isPlainObject(new Foo);
+	 * // => false
+	 *
+	 * _.isPlainObject([1, 2, 3]);
+	 * // => false
+	 *
+	 * _.isPlainObject({ 'x': 0, 'y': 0 });
+	 * // => true
+	 *
+	 * _.isPlainObject(Object.create(null));
+	 * // => true
+	 */
+	function isPlainObject(value) {
+	  if (!isObjectLike(value) ||
+	      objectToString.call(value) != objectTag || isHostObject(value)) {
+	    return false;
+	  }
+	  var proto = getPrototype(value);
+	  if (proto === null) {
+	    return true;
+	  }
+	  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
+	  return (typeof Ctor == 'function' &&
+	    Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString);
+	}
+
+	module.exports = isPlainObject;
+
+
+/***/ },
+/* 196 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var overArg = __webpack_require__(197);
+
+	/** Built-in value references. */
+	var getPrototype = overArg(Object.getPrototypeOf, Object);
+
+	module.exports = getPrototype;
+
+
+/***/ },
+/* 197 */
+/***/ function(module, exports) {
+
+	/**
+	 * Creates a unary function that invokes `func` with its argument transformed.
+	 *
+	 * @private
+	 * @param {Function} func The function to wrap.
+	 * @param {Function} transform The argument transform.
+	 * @returns {Function} Returns the new function.
+	 */
+	function overArg(func, transform) {
+	  return function(arg) {
+	    return func(transform(arg));
+	  };
+	}
+
+	module.exports = overArg;
+
+
+/***/ },
+/* 198 */
+/***/ function(module, exports) {
+
+	/**
+	 * Checks if `value` is a host object in IE < 9.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a host object, else `false`.
+	 */
+	function isHostObject(value) {
+	  // Many host objects are `Object` objects that can coerce to strings
+	  // despite having improperly defined `toString` methods.
+	  var result = false;
+	  if (value != null && typeof value.toString != 'function') {
+	    try {
+	      result = !!(value + '');
+	    } catch (e) {}
+	  }
+	  return result;
+	}
+
+	module.exports = isHostObject;
+
+
+/***/ },
+/* 199 */
+/***/ function(module, exports) {
+
+	/**
+	 * Checks if `value` is object-like. A value is object-like if it's not `null`
+	 * and has a `typeof` result of "object".
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 * @example
+	 *
+	 * _.isObjectLike({});
+	 * // => true
+	 *
+	 * _.isObjectLike([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObjectLike(_.noop);
+	 * // => false
+	 *
+	 * _.isObjectLike(null);
+	 * // => false
+	 */
+	function isObjectLike(value) {
+	  return !!value && typeof value == 'object';
+	}
+
+	module.exports = isObjectLike;
+
+
+/***/ },
+/* 200 */
 /***/ function(module, exports) {
 
 	/**
@@ -23027,7 +23197,7 @@
 
 
 /***/ },
-/* 196 */
+/* 201 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -23085,7 +23255,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 197 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23101,7 +23271,7 @@
 
 	var _reactRedux = __webpack_require__(173);
 
-	var _actions = __webpack_require__(198);
+	var _actions = __webpack_require__(203);
 
 	var actions = _interopRequireWildcard(_actions);
 
@@ -23227,7 +23397,7 @@
 	})(NavBar);
 
 /***/ },
-/* 198 */
+/* 203 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23244,7 +23414,7 @@
 	};
 
 /***/ },
-/* 199 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23260,13 +23430,13 @@
 
 	var _reactRedux = __webpack_require__(173);
 
-	var _LightMonitor = __webpack_require__(200);
+	var _LightMonitor = __webpack_require__(205);
 
 	var _LightMonitor2 = _interopRequireDefault(_LightMonitor);
 
-	var _actions = __webpack_require__(198);
+	var _actions = __webpack_require__(203);
 
-	var _socketEvents = __webpack_require__(201);
+	var _socketEvents = __webpack_require__(206);
 
 	var _socketEvents2 = _interopRequireDefault(_socketEvents);
 
@@ -23316,7 +23486,7 @@
 	})(MainView);
 
 /***/ },
-/* 200 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23332,7 +23502,7 @@
 
 	var _reactRedux = __webpack_require__(173);
 
-	var _actions = __webpack_require__(198);
+	var _actions = __webpack_require__(203);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23401,7 +23571,7 @@
 	exports.default = LightMonitor;
 
 /***/ },
-/* 201 */
+/* 206 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23427,7 +23597,7 @@
 	exports.default = scoketEvents;
 
 /***/ },
-/* 202 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23438,15 +23608,15 @@
 
 	var _redux = __webpack_require__(180);
 
-	var _monitors = __webpack_require__(203);
+	var _monitors = __webpack_require__(208);
 
 	var _monitors2 = _interopRequireDefault(_monitors);
 
-	var _rooms = __webpack_require__(206);
+	var _rooms = __webpack_require__(211);
 
 	var _rooms2 = _interopRequireDefault(_rooms);
 
-	var _selectedRoom = __webpack_require__(207);
+	var _selectedRoom = __webpack_require__(212);
 
 	var _selectedRoom2 = _interopRequireDefault(_selectedRoom);
 
@@ -23475,7 +23645,7 @@
 	exports.default = reducers;
 
 /***/ },
-/* 203 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23484,9 +23654,9 @@
 	  value: true
 	});
 
-	var _immutable = __webpack_require__(204);
+	var _immutable = __webpack_require__(209);
 
-	var _util = __webpack_require__(205);
+	var _util = __webpack_require__(210);
 
 	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: 1, name: "Monitor Blue", type: "light", roomId: 1, value: "off" }), (0, _immutable.Map)({ id: 2, name: "Monitor Green", type: "air", roomId: 1, value: "off" }), (0, _immutable.Map)({ id: 3, name: "Monitor Red", type: "light", roomId: 1, value: "off" })]);
 
@@ -23519,7 +23689,7 @@
 	exports.default = monitors;
 
 /***/ },
-/* 204 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -28503,7 +28673,7 @@
 	}));
 
 /***/ },
-/* 205 */
+/* 210 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28517,7 +28687,7 @@
 	};
 
 /***/ },
-/* 206 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28526,9 +28696,9 @@
 	  value: true
 	});
 
-	var _immutable = __webpack_require__(204);
+	var _immutable = __webpack_require__(209);
 
-	var _util = __webpack_require__(205);
+	var _util = __webpack_require__(210);
 
 	var intialState = (0, _immutable.List)([(0, _immutable.Map)({ id: 1, name: "Suite 1" }), (0, _immutable.Map)({ id: 2, name: "Suite 2" }), (0, _immutable.Map)({ id: 3, name: "Sala" }), (0, _immutable.Map)({ id: 4, name: "Cozinha" })]);
 
@@ -28545,7 +28715,7 @@
 	exports.default = rooms;
 
 /***/ },
-/* 207 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28554,9 +28724,9 @@
 	  value: true
 	});
 
-	var _immutable = __webpack_require__(204);
+	var _immutable = __webpack_require__(209);
 
-	var _util = __webpack_require__(205);
+	var _util = __webpack_require__(210);
 
 	var intialState = (0, _immutable.Map)({ id: 0, name: "" });
 
@@ -28575,7 +28745,7 @@
 	exports.default = selectedRoom;
 
 /***/ },
-/* 208 */
+/* 213 */
 /***/ function(module, exports) {
 
 	'use strict';

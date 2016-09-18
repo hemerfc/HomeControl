@@ -9,7 +9,8 @@ SocketIOClient client;
 byte mac[] = { 0xAA, 0x00, 0xBE, 0xEF, 0xFE, 0xEE };
 byte ip[] = { 192, 168, 1, 143 };
 byte dn[] = { 8, 8, 8, 8 };
-byte gw[] = { 192, 168, 1 , 10 };
+byte gw[] = { 192, 168, 1 , 1 };
+//byte gw[] = { 192, 168, 1 , 10 };
 
 char hostname[] = "homecontrol1.herokuapp.com";
 int port = 80;
@@ -19,6 +20,7 @@ int port = 80;
 extern String RID;
 extern String Rname;
 extern String Rcontent;
+extern String Rmsg;
 
 unsigned long previousMillis = 0;
 long interval = 10000;
@@ -26,11 +28,7 @@ void setup() {
   pinMode(A0, OUTPUT);
   pinMode(A1, OUTPUT);
   pinMode(A2, OUTPUT);
-  /*
-  pinMode(10, OUTPUT);    //for some ethernet shield on the mega : disables the SD and enables the W5100
-  digitalWrite(10, LOW);
-  pinMode(4, OUTPUT);
-  digitalWrite(4, HIGH);*/
+
   Serial.begin(9600);
 
   Ethernet.begin(mac, ip, dn, gw );
@@ -64,6 +62,7 @@ void loop()
         client.send("cmd", "on", "3");
       }
     }
+
     if (RID == "cmd" && Rname == "off") {
       if (Rcontent == "1") {
         digitalWrite(A0, LOW);
