@@ -13,7 +13,6 @@ export const LightMonitor = ({ state, onChange, onMove }) => (
                     "content/img/light-off.png"} />
         </div>
         <div className="col-xs-9 text-right">
-          <div className="huge">{state.get('name')}</div>
           <div className={"toggle btn btn-primary " +
                           (state.get('value')==1?" on":" off") }
                data-toggle="toggle" style={{ width: '102px', height: '34px' }}
@@ -25,7 +24,7 @@ export const LightMonitor = ({ state, onChange, onMove }) => (
               <span className="toggle-handle btn btn-default"></span>
             </div>
           </div>
-          <div>Detalhes</div>
+          <div>{state.get('name')}</div>
         </div>
       </div>
     </div>
